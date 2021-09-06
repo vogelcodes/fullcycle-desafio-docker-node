@@ -1,6 +1,7 @@
 version: '3'
 
 services: 
+  
   app:
     image: node:15
     container_name: app
@@ -13,8 +14,7 @@ services:
     command: bash -c "npm install && node index.js"
  
     restart: always
-    ports: 
-      - 8080:3000
+
     depends_on: 
       - db
   db:
@@ -32,6 +32,20 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=node
       - MYSQL_PASSWORD=node
+  
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    networks: 
+      - desafio-node
+    ports: 
+      - "8080:80"
+    depends_on: 
+      - db
+      - app
+
 networks: 
   desafio-node:
     driver: bridge 
