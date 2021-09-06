@@ -11,7 +11,10 @@ const config = {
     password: 'node',
     database: 'nodedb'
 };
-
+const connection = mysql.createConnection(config);
+    const sql = 'CREATE TABLE IF NOT EXISTS people (id int not null auto_increment, name varchar(255), primary key (id))'
+    connection.query(sql);
+    connection.end()
 
 
 app.get('/', async(req, res)=> {
