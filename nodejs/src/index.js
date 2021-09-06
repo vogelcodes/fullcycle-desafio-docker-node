@@ -21,7 +21,7 @@ app.get('/', async(req, res)=> {
     connection.query(sql);
     connection.query('SELECT * FROM `people`', (error, results, fields)=> {
         results.map(name => names.push(name.name))
-        res.send('<h1>FullCycle!</h1><ul>'+names.join('</ul><ul>')+'</ul>')
+        res.send('<h1>FullCycle!</h1><ul><li>'+names.join('</li><li>')+'</li></ul>')
     });
     connection.end()
 })
